@@ -13,14 +13,24 @@ const NewGame = () => {
         {players.map((pl, i) => {
           return (
             <div className="column" key={i}>
-              <input
-                autoComplete="off"
-                type="text"
-                id={`nameField-${i}`}
-                onChange={(e) => {
-                  addPlayerNameToState(e);
+              <form
+                onSubmit={(e) => {
+                  addPlayerDataToState(e);
+                  e.preventDefault();
                 }}
-              />
+              >
+                <input
+                  autoComplete="off"
+                  type="text"
+                  id={`nameField-${i}`}
+                  name="name"
+                  // onChange={(e) => {
+                  //   addPlayerDataToState(e);
+                  // }}
+                />
+                <input type="color" id={`color-${i}`} name="color" />
+                <button type="submit">Add</button>
+              </form>
             </div>
           );
         })}
@@ -28,10 +38,12 @@ const NewGame = () => {
     );
   };
 
-  const addPlayerNameToState = (e) => {
+  const addPlayerDataToState = (e) => {
     const stateUpdate = state || {};
-    stateUpdate[e.target.id] = {
-      name: e.target.value,
+
+    stateUpdate[e.target.name.id] = {
+      name: e.target.name.value,
+      color: e.target.color.value,
       points: [0]
     };
     setState(stateUpdate);

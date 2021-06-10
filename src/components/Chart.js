@@ -1,6 +1,5 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import colors from "./../static/colors";
 
 const ChartView = (props) => {
   const generateDatasets = () => {
@@ -14,7 +13,7 @@ const ChartView = (props) => {
         return {
           data: points,
           label: props.players[i],
-          borderColor: colors[i],
+          borderColor: props.colors[i],
           fill: false
         };
       })

@@ -8,6 +8,7 @@ const GameTime = () => {
   const [showPenaltyModal, setShowPenaltyModal] = useState(false);
   const context = useContext(GameContext);
   const playerNames = [];
+  const playerColors = [];
   const pointsset = [];
 
   const Points = (props) => {
@@ -41,10 +42,11 @@ const GameTime = () => {
         {context.players.map((player, i) => {
           const tots = total(player.points);
           playerNames.push(player.name);
+          playerColors.push(player.color);
           pointsset.push(cumulativize(player.points));
           return (
             <div className="column" key={`player-${i}`}>
-              <h3 style={{ color: colors[i], fontWeight: "bold" }}>
+              <h3 style={{ color: player.color, fontWeight: "bold" }}>
                 {player.name}
               </h3>
               <Points points={player.points} />
@@ -101,7 +103,11 @@ const GameTime = () => {
   return (
     <div className="game-time-container">
       <ScoreGrid />
-      <ChartView players={playerNames} pointsset={pointsset} />
+      <ChartView
+        players={playerNames}
+        colors={playerColors}
+        pointsset={pointsset}
+      />
       {showPenaltyModal && <PenaltyModal />}
     </div>
   );
