@@ -5,7 +5,7 @@ const ChartView = (props) => {
   const generateDatasets = () => {
     let labelArray = [];
     for (let i = 0; i < props.pointsset[0].length; i++) {
-      labelArray.push("Round " + i + 1);
+      labelArray.push(`Round ${i + 1}`);
     }
     return {
       labels: labelArray,
