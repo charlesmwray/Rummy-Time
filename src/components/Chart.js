@@ -49,11 +49,6 @@ const ChartView = (props) => {
                       ticks: {
                         beginAtZero: true
                       }
-                    },
-                    {
-                      gridLines: {
-                        zeroLineColor: "rgba(255,0,0,.4)"
-                      }
                     }
                   ]
                 },

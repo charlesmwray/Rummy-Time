@@ -42,7 +42,7 @@ function App() {
 
   return (
     <GameContext.Provider value={state}>
-      <div className="App container">
+      <div className="App container" id="app">
         <div className="row">
           <div className="column">
             <h1 className="logo">Rummy Time</h1>

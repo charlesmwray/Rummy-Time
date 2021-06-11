@@ -44,8 +44,9 @@ const GameTime = () => {
           playerNames.push(player.name);
           playerColors.push(player.color);
           pointsset.push(cumulativize(player.points));
+
           return (
-            <div className="column" key={`player-${i}`}>
+            <div className="column player-card" key={`player-${i}`}>
               <h3 style={{ color: player.color, fontWeight: "bold" }}>
                 {player.name}
               </h3>

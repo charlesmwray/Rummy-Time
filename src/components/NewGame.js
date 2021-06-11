@@ -12,7 +12,7 @@ const NewGame = () => {
       <div className="row">
         {players.map((pl, i) => {
           return (
-            <div className="column" key={i}>
+            <div className="column" style={{ margin: "0 2rem" }} key={i}>
               <form
                 onSubmit={(e) => {
                   addPlayerDataToState(e);
@@ -24,12 +24,11 @@ const NewGame = () => {
                   type="text"
                   id={`nameField-${i}`}
                   name="name"
-                  // onChange={(e) => {
-                  //   addPlayerDataToState(e);
-                  // }}
                 />
                 <input type="color" id={`color-${i}`} name="color" />
-                <button type="submit">Add</button>
+                <button type="submit" name="addButton">
+                  Add
+                </button>
               </form>
             </div>
           );
@@ -46,6 +45,9 @@ const NewGame = () => {
       color: e.target.color.value,
       points: [0]
     };
+
+    e.target.addButton.innerText = "Added";
+
     setState(stateUpdate);
   };
 
@@ -55,7 +57,7 @@ const NewGame = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row" style={{ marginBottom: "2rem" }}>
         <h2 className="column">Who's in?</h2>
       </div>
       <div className="row">
@@ -66,7 +68,7 @@ const NewGame = () => {
       <div className="row">
         <button
           style={{
-            margin: "0 auto"
+            margin: "5rem auto"
           }}
           onClick={() => {
             addPlayers();
