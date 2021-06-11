@@ -38,6 +38,10 @@ input {
   color: var(--main-font-color);
 }
 
+input[type="color"] {
+  width: -webkit-fill-available;
+}
+
 form {
   margin-bottom: 0;
 }
