@@ -5,6 +5,7 @@ import colors from "./../static/colors";
 const NewGame = () => {
   const context = useContext(GameContext);
   const [state, setState] = useState({});
+  const [noPlayersAddedWarning, setNoPlayersAddedWarning] = useState(false);
 
   const PlayerGrid = () => {
     const players = [1, 2, 3, 4, 5, 6];
@@ -16,6 +17,7 @@ const NewGame = () => {
               <form
                 onSubmit={(e) => {
                   addPlayerDataToState(e);
+
                   e.preventDefault();
                 }}
               >
@@ -52,7 +54,15 @@ const NewGame = () => {
   };
 
   const addPlayers = () => {
-    context.setPlayers(Object.values(state));
+    console.log(state);
+    if (Object.keys(state).length > 0) {
+      context.setPlayers(Object.values(state));
+    } else {
+      setNoPlayersAddedWarning(true);
+      setTimeout(() => {
+        setNoPlayersAddedWarning(false);
+      }, 5000);
+    }
   };
 
   return (
@@ -77,6 +87,16 @@ const NewGame = () => {
           Ready to rumble
         </button>
       </div>
+      {noPlayersAddedWarning && (
+        <div
+          style={{
+            margin: "1rem"
+          }}
+          className="row"
+        >
+          <h3>No players added.</h3>
+        </div>
+      )}
     </>
   );
 };
