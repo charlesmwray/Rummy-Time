@@ -1,6 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
+// import "chartjs-plugin-annotation";
+
 const ChartView = (props) => {
   const generateDatasets = () => {
     let labelArray = [];
@@ -54,6 +56,23 @@ const ChartView = (props) => {
                 },
                 legend: {
                   display: false
+                },
+                annotation: {
+                  annotations: [
+                    {
+                      type: "line",
+                      mode: "horizontal",
+                      scaleID: "y-axis-0",
+                      value: 200,
+                      borderColor: "red",
+                      borderWidth: 2,
+                      label: {
+                        backgroundColor: "red",
+                        //content: "Test Label",
+                        enabled: true
+                      }
+                    }
+                  ]
                 }
               }}
             />
