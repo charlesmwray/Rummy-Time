@@ -19,6 +19,16 @@ function App() {
       players: newPlayers
     });
   };
+
+  const editPoints = (points, i, context) => {
+    let players = context.players;
+    players[i].points = points;
+    setState({
+      ...context,
+      players
+    });
+  };
+
   const [state, setState] = useState({
     gameState: "newGame",
     setGameState: (gameState) => {
@@ -35,7 +45,8 @@ function App() {
         gameState: "ready"
       });
     },
-    updatePoints: updatePointsAndState
+    updatePoints: updatePointsAndState,
+    editPoints
   });
 
   const { gameState, setGameState } = state;

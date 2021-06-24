@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import GameContext from "./../context/GameContext";
 import ChartView from "./Chart";
-import colors from "./../static/colors";
 import PenaltyModal from "./PenaltyModal";
 
 const GameTime = () => {
@@ -12,14 +11,50 @@ const GameTime = () => {
   const pointsset = [];
 
   const Points = (props) => {
-    const { points } = props;
+    const { points, playerIndex } = props;
+    const [showEditForm, setShowEditForm] = useState(false);
 
     return (
-      <div className="points-container">
-        {points.map((p, i) => {
-          return i > 0 && <div key={`${i}-p`}>{p}</div>;
-        })}
-      </div>
+      <>
+        <div
+          onClick={() => {
+            console.log(context.players[playerIndex].points);
+
+            setShowEditForm(true);
+          }}
+          className="points-container"
+        >
+          {points.map((p, i) => {
+            return i > 0 && <div key={`${i}-p`}>{p}</div>;
+          })}
+        </div>
+        {showEditForm && (
+          <div className="edit-form">
+            <textarea
+              id={`${playerIndex}-edit-points`}
+              defaultValue={context.players[playerIndex].points}
+            />
+            <button
+              onClick={() => {
+                let points = document.getElementById(
+                  `${playerIndex}-edit-points`
+                ).value;
+                let parsedPoints = [];
+
+                points = points.trim().replace(" ", "").split(",");
+
+                points.map((p) => {
+                  parsedPoints.push(parseInt(p, 10));
+                });
+
+                context.editPoints(parsedPoints, playerIndex, context);
+              }}
+            >
+              Save
+            </button>
+          </div>
+        )}
+      </>
     );
   };
 
@@ -50,7 +85,7 @@ const GameTime = () => {
               <h3 style={{ color: player.color, fontWeight: "bold" }}>
                 {player.name}
               </h3>
-              <Points points={player.points} />
+              <Points points={player.points} playerIndex={i} />
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
